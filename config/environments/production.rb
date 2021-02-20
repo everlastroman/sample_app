@@ -71,7 +71,7 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'roman.mydomain.com',
+    :domain         => 'guarded-dawn-50226.herokuapp.com',
     :authentication => :plain,
     :enable_starttls_auto => true
   }
