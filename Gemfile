@@ -58,6 +58,7 @@ group :development do
 end
 
 group :production do
+  ruby "2.5.5"
   gem 'puma', '~>4.0.1'
   gem 'pg', '~> 0.20'
   gem 'rails_12factor', '~> 0.0.2'
