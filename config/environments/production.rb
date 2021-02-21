@@ -71,7 +71,6 @@ Rails.application.configure do
     :address        => 'smtp.sendgrid.net',
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :ssl            => true,
     :domain         => 'guarded-dawn-50226.herokuapp.com',
     :authentication => :plain,
     :enable_starttls_auto => true
