@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
+  has_many :microposts, dependent: :destroy
   # Возвращает дайджест для указанной строки.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? 
@@ -41,6 +42,11 @@ class User < ActiveRecord::Base
   def activate 
     update_columns(activated: true, activated_at: Time.zone.now)
   end
+
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
 
   def send_activation_email
     UserMailer.account_activation(self).deliver_now

@@ -17,3 +17,6 @@
 /tmp
 # Ignore spring
 /spring/*.pid
+
+# Ignore test images
+/public/uploads
