@@ -6,6 +6,24 @@ class UserTest < ActiveSupport::TestCase
                     password: "foobar", password_confirmation: "foobar")
   end
 
+  test "feed shoud have the right posts" do
+    roman = users(:roman)
+    archer = users(:archer)
+    lana = users(:lana)
+
+    lana.microposts.each do |post_following|
+      assert roman.feed.include?(post_following)
+    end
+
+    roman.microposts.each do |post_self|
+      assert roman.feed.include?(post_self)
+    end
+
+    archer.microposts.each do |post_unfollowed|
+      assert_not roman.feed.include?(post_unfollowed)
+    end
+  end
+
   test "shoud be valid" do
     assert @user.valid?
   end
@@ -78,4 +96,16 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+  
+  test "should follow and unfollow a user" do
+    roman = users(:roman)
+    archer = users(:archer)
+    assert_not roman.following?(archer)
+    roman.follow(archer)
+    assert roman.following?(archer)
+    assert archer.followers.include?(roman)
+    roman.unfollow(archer)
+    assert_not roman.following?(archer)
+  end
+
 end
